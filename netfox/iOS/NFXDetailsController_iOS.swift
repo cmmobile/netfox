@@ -343,7 +343,7 @@ extension NFXDetailsController_iOS: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
         let decodedURL = URL.absoluteString.removingPercentEncoding
         switch decodedURL {
-        case "[URL]":
+        case "-[URL]":
             guard let queryItems = self.selectedModel.requestURLQueryItems, queryItems.count > 0 else {
                 return false
             }
