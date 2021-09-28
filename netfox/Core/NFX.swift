@@ -262,8 +262,9 @@ extension NFX {
     fileprivate func showNFXFollowingPlatform()
     {
         let listController = NFXListController_iOS()
-        listController.pressedEditButton = {
-            pressedEditButton?()
+        listController.pressedEditButton = { [weak self] in
+            guard let self = self else { return }
+            self.pressedEditButton?()
         }
         let navigationController = UINavigationController(rootViewController: listController)
         navigationController.navigationBar.isTranslucent = false
