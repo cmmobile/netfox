@@ -16,6 +16,7 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
     
     var tableView: UITableView = UITableView()
     var searchController: UISearchController!
+    var pressedEditButton: (() -> Void)?
     
     // MARK: View Life Cycle
     
@@ -40,7 +41,8 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
 
         let rightButtons = [
             UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(NFXListController_iOS.trashButtonPressed)),
-            UIBarButtonItem(image: UIImage.NFXSettings(), style: .plain, target: self, action: #selector(NFXListController_iOS.settingsButtonPressed))
+            UIBarButtonItem(image: UIImage.NFXSettings(), style: .plain, target: self, action: #selector(NFXListController_iOS.settingsButtonPressed)),
+            UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(NFXListController_iOS.editButtonPressed))
         ]
 
         self.navigationItem.rightBarButtonItems = rightButtons
@@ -111,6 +113,10 @@ class NFXListController_iOS: NFXListController, UITableViewDelegate, UITableView
     @objc func closeButtonPressed()
     {
         NFX.sharedInstance().hide()
+    }
+    
+    @objc func editButtonPressed() {
+        pressedEditButton?()
     }
     
     // MARK: UISearchResultsUpdating

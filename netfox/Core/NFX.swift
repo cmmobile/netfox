@@ -63,6 +63,8 @@ open class NFX: NSObject
     fileprivate var filters = [Bool]()
     fileprivate var lastVisitDate: Date = Date()
     internal var cacheStoragePolicy = URLCache.StoragePolicy.notAllowed
+    
+    open var pressedEditButton: (() -> Void)?
 
     @objc open func start()
     {
@@ -259,7 +261,11 @@ extension NFX {
 
     fileprivate func showNFXFollowingPlatform()
     {
-        let navigationController = UINavigationController(rootViewController: NFXListController_iOS())
+        let listController = NFXListController_iOS()
+        listController.pressedEditButton = {
+            pressedEditButton?()
+        }
+        let navigationController = UINavigationController(rootViewController: listController)
         navigationController.navigationBar.isTranslucent = false
         navigationController.navigationBar.tintColor = UIColor.NFXOrangeColor()
         navigationController.navigationBar.barTintColor = UIColor.NFXStarkWhiteColor()
