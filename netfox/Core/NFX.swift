@@ -77,7 +77,9 @@ open class NFX: NSObject
         register()
         enable()
         clearOldData()
-        showMessage("Started!")
+        
+        // CMoney: This func let frameworks' assets not working
+//        showMessage("Started!")
     #if os(OSX)
         self.addNetfoxToMainMenu()
     #endif
@@ -89,7 +91,9 @@ open class NFX: NSObject
         disable()
         clearOldData()
         self.started = false
-        showMessage("Stopped!")
+        
+        // CMoney: This func let frameworks' assets not working
+//        showMessage("Stopped!")
     #if os(OSX)
         self.removeNetfoxFromMainmenu()
     #endif

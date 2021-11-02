@@ -48,11 +48,17 @@ class NFXGenericController: NFXViewController
             tempMutableString.addAttribute(.foregroundColor, value: NFXColor.NFXOrangeColor(), range: match.range)
         }
         
-        let regexKeys = try! NSRegularExpression(pattern: "\\[.+?\\]", options: NSRegularExpression.Options.caseInsensitive)
+        let regexKeys = try! NSRegularExpression(pattern: "-\\[.+?\\]", options: NSRegularExpression.Options.caseInsensitive)
         let matchesKeys = regexKeys.matches(in: string, options: NSRegularExpression.MatchingOptions.withoutAnchoringBounds, range: NSMakeRange(0, l)) as Array<NSTextCheckingResult>
         
         for match in matchesKeys {
-            tempMutableString.addAttribute(.foregroundColor, value: NFXColor.NFXBlackColor(), range: match.range)
+            tempMutableString.addAttribute(.foregroundColor, value: UIColor.systemYellow, range: match.range)
+        }
+        
+        let urlRegexKeys = try! NSRegularExpression(pattern: "-\\[URL\\]", options: NSRegularExpression.Options.caseInsensitive)
+        let urlMatchesKeys = urlRegexKeys.matches(in: string, options: NSRegularExpression.MatchingOptions.withoutAnchoringBounds, range: NSMakeRange(0, l)) as Array<NSTextCheckingResult>
+        
+        for match in urlMatchesKeys {
             tempMutableString.addAttribute(.link,
                                            value: (string as NSString).substring(with: match.range),
                                            range: match.range)
